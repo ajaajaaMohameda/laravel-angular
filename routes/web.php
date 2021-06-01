@@ -15,7 +15,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::resource('bands', 'BandController');
 Route::get('/band', function() {
     return view('band');
 });
