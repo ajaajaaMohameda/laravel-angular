@@ -3,8 +3,43 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+/**
+* @SWG\Definition(
+* definition="Item",
+* required={"type", "name", "company"},
+* @SWG\Property(
+* property="type",
+* type="string",
+* description="Item Type",
+* example="Exhaust"
+* ),
+* @SWG\Property(
+* property="name",
+* type="string",
+* description="Item name",
+* example="2 into 1 Exhaust"
+* ),
+* @SWG\Property(
+* property="company",
+* type="string",
+* description="Produced by: some company",
+* example="Vance and Hines"
+* )
+* )
+*/
 class Item extends Model
 {
     //
+    protected $table = 'items';
+
+    protected $fillable = [
+        'type',
+        'name',
+        'company',
+        'bike_id'
+    ];
+
+    public function bike() {
+        return $this->belongsTo('App\Bike');
+    }
 }

@@ -15,6 +15,10 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('type');
+            $table->string('name');
+            $table->text('company');
+            $table->unsignedInteger('bike_id');
             $table->timestamps();
         });
     }
