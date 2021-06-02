@@ -1,0 +1,15 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Custom Bikes",
+        "description": "Class ApiController",
+        "contact": {
+            "name": "Developer Contact",
+            "url": "https://www.example.com"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/": {}
+    }
+}
