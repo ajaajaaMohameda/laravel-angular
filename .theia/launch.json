@@ -11,14 +11,6 @@
             "pathMappings": {
                 "/application": "/workspace/laravel-angular/chapter-04"
             }
-		},
-		{
-			"name": "Launch currently open script",
-			"type": "php",
-			"request": "launch",
-			"program": "${file}",
-			"cwd": "${fileDirname}",
-			"port": 9009
 		}
 	]
 }
