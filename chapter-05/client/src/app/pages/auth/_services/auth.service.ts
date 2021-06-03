@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class AuthService {
 
-  public currentUser: User;
+  public currentUser: User = {};
   private readonly apiUrl = environment.apiUrl;
   private registerUrl = this.apiUrl + '/register';
   private loginUrl = this.apiUrl + '/login';
@@ -70,8 +70,12 @@ export class AuthService {
     return localStorage.setItem('token', token);
   }
 
-  getToken(): string {
-    return localStorage.getItem('token');
+  getToken(): any {
+    // return localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    if(token) {
+      return token;
+    }
   }
 
   getUser(): Observable<User> {

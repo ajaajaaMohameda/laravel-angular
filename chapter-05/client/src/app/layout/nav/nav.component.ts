@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from 'src/app/pages/auth/_services/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -8,7 +9,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private titleService: Title) { }
+  constructor(private titleService: Title, auth: AuthService) { }
 
   ngOnInit(): void {
   }
