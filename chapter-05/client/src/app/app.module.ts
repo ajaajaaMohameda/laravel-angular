@@ -10,6 +10,8 @@ import { BikesModule } from './pages/bikes/bikes.module';
 import { BuildersModule } from './pages/builders/builders.module';
 import { AuthModule } from './pages/auth/auth.module';
 import { NavComponent } from './layout/nav/nav.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpInterceptorService } from './pages/shared/_services/http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,13 @@ import { NavComponent } from './layout/nav/nav.component';
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
