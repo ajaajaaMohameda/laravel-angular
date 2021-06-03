@@ -25,11 +25,11 @@ class RatingController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      *
-     * @SWG\Post(
+     * @OA\Post(
      * path="/api/bikes/{bike_id}/ratings",
      * tags={"Ratings"},
      * summary="rating a Bike",
-     * @SWG\Parameter(
+     * @OA\Parameter(
      * in="path",
      * name="id",
      * required=true,
@@ -37,31 +37,31 @@ class RatingController extends Controller
      * format="int64",
      *           description="Bike Id"
      *       ),
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *           name="body",
      *           in="body",
      *           required=true,
-     *           @SWG\Schema(ref="#/definitions/Rating"),
+     *           @OA\Schema(ref="#/definitions/Rating"),
      *           description="Json format",
      *        ),
-     * @SWG\Response(
+     * @OA\Response(
      * response=201,
      * description="Success: A Newly Created Rating",
-     * @SWG\Schema(ref="#/definitions/Rating")
+     * @OA\Schema(ref="#/definitions/Rating")
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      * response=401,
      * description="Refused: Unauthenticated"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      * response="422",
      * description="Missing mandatory field"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      * response="404",
      * description="Not Found"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      *        response="405",
      *    description="Invalid HTTP Method"
      * ),

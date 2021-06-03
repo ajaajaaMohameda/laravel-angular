@@ -6,22 +6,22 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
-* @SWG\Definition(
+* @OA\Definition(
 * definition="User",
 * required={"name", "email", "password"},
-* @SWG\Property(
+* @OA\Property(
 * property="name",
 * type="string",
 * description="User name",
 * example="John Conor"
 * ),
-* @SWG\Property(
+* @OA\Property(
 * property="email",
 * type="string",
 * description="Email Address",
 * example="john.conor@terminator.com"
 * ),
-* @SWG\Property(
+* @OA\Property(
 * property="password",
 * type="string",
 * description="A very secure password",

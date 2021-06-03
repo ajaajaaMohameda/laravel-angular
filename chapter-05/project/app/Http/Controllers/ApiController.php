@@ -17,8 +17,8 @@ class ApiController extends Controller
      *  path="/"
      * )
      *     basePath="",
-     *     host="localhost:8081",
-     *     schemes={"http"},
+     *     host="0.0.0.0:8081",
+     *     schemes={"https"},
      *     @OA\Info(
      *         version="1.0",
      *         title="Custom Bikes",

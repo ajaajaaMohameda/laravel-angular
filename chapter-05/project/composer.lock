@@ -34,7 +34,7 @@
                 "phpunit/phpunit": "7.*"
             },
             "suggest": {
-                "zircote/swagger-php:~2.0": "!!! Require Swagger-PHP ~2.0 for @SWG annotations support !!!"
+                "zircote/swagger-php:~2.0": "!!! Require Swagger-PHP ~2.0 for @OA annotations support !!!"
             },
             "type": "library",
             "extra": {

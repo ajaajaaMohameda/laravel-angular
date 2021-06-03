@@ -5,23 +5,23 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @SWG\Definition(
+ * @OA\Definition(
  *  definition="Builder",
  *  required={"name", "description", "location"}
  * 
- * @SWG\Property(
+ * @OA\Property(
  *  property="name",
  *  type="string",
  *  description="Builder name",
  *  example="Jesse james"
  * ),
- * @SWG\Property(
+ * @OA\Property(
  *  property="description",
  *  type="string",
  *  description="Famous Motorcycle builder from Texas",
  *  example="Austin Speed Shop"
  * ),
- * @SWG\Property(
+ * @OA\Property(
  *  property="location",
  *  type="string",
  *  description="Texas/Usa",

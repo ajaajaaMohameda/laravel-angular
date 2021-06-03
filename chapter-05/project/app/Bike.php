@@ -5,34 +5,34 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @SWG\Definition(
+ * @OA\Definition(
  * definition="Bike",
  * required={"make", "model", "year", "mods"},
- * @SWG\Property(
+ * @OA\Property(
  * property="make",
  * type="string",
  * description="Company name",
  * example="Harley Davidson, Honda, Yamaha"
  * ),
- * @SWG\Property(
+ * @OA\Property(
  * property="model",
  * type="string",
  * description="Motorcycle model",
  * example="Xl1200, Shadow ACE, V-Star"
  * ),
- * @SWG\Property(
+ * @OA\Property(
  * property="year",
  * type="string",
  * description="Fabrication year",
  * example="2009, 2008, 2007"
  * ),
- * @SWG\Property(
+ * @OA\Property(
  * property="mods",
  * type="string",
  * description="Motorcycle description of modifications",
  * example="New exhaust system"
  * ),
- * @SWG\Property(
+ * @OA\Property(
  * property="picture",
  * type="string",
  * description="Bike image URL",

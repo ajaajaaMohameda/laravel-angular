@@ -5,22 +5,22 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @SWG\Definition(
+ * @OA\Definition(
  * definition="Rating",
  * required={"bike_id", "user_id", "rating"},
- * @SWG\Property(
+ * @OA\Property(
  * property="biker_id",
  * type="integer",
  * description="Bike id",
  * example="1"
  * ),
- * @SWG\Property(
+ * @OA\Property(
  * property="user_id",
  * type="integer",
  * description="User id",
  * example="2"
  * ),
- * @SWG\Property(
+ * @OA\Property(
  * property="rating",
  * type="integer",
  * description="Vote by rating",

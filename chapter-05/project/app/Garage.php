@@ -5,16 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
-* @SWG\Definition(
+* @OA\Definition(
 * definition="Garage",
 * required={"name", "custumer_level"},
-* @SWG\Property(
+* @OA\Property(
 * property="name",
 * type="string",
 * description="Jhonny Garage",
 * example="Exhaust"
 * ),
-* @SWG\Property(
+* @OA\Property(
 * property="customer_level",
 * type="integer",
 * description="Whats the garage level",

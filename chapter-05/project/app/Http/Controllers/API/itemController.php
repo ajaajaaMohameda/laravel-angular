@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Item;
+use Validator;
 
 class itemController extends Controller
 {
@@ -13,16 +14,16 @@ class itemController extends Controller
      *
      * @return \Illuminate\Http\Response
      *
-     * @SWG\Get(
+     * @OA\Get(
      * path="/api/items",
      * tags={"Items"},
      * summary="List Items",
-     * @SWG\Response(
+     * @OA\Response(
      * response=200,
      * description="Success: List all Items",
-     * @SWG\Schema(ref="#/definitions/Item")
+     * @OA\Schema(ref="#/definitions/Item")
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      * response="404",
      * description="Not Found"
      * )
@@ -41,27 +42,27 @@ class itemController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      *
-     * @SWG\Post(
+     * @OA\Post(
      * path="/api/items",
      * tags={"Items"},
      * summary="Create Item",
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *           name="body",
      *           in="body",
      *           required=true,
-     *           @SWG\Schema(ref="#/definitions/Item"),
+     *           @OA\Schema(ref="#/definitions/Item"),
      *           description="Json format",
      *       ),
-     * @SWG\Response(
+     * @OA\Response(
      * response=201,
      * description="Success: A Newly Created Item",
-     * @SWG\Schema(ref="#/definitions/Item")
+     * @OA\Schema(ref="#/definitions/Item")
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      * response="422",
      * description="Missing mandatory field"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      * response="404",
      * description="Not Found"
      * )
@@ -70,6 +71,17 @@ class itemController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = Validator::make($request->all(), [
+            'type' => 'required',
+            'name' => 'required',
+            'company' => 'required',
+            'bike_id' => 'required'
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
         $createItem = Item::create($request->all());
 
         return $createItem;
@@ -81,23 +93,23 @@ class itemController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      *
-     * @SWG\Get(
+     * @OA\Get(
      * path="/api/items/{id}",
      * tags={"Items"},
      * summary="Get Item by Id",
-     * @SWG\Parameter(
+     * @OA\Parameter(
      * name="id",
      * in="path",
      * required=true,
      * type="integer",
      * description="Display the specified Item by id.",
      *       ),
-     * @SWG\Response(
+     * @OA\Response(
      * response=200,
      * description="Success: Return the Item",
-     * @SWG\Schema(ref="#/definitions/Item")
+     * @OA\Schema(ref="#/definitions/Item")
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      * response="404",
      * description="Not Found"
      * )
@@ -117,34 +129,34 @@ class itemController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      *
-     * @SWG\Put(
+     * @OA\Put(
      * path="/api/items/{id}",
      * tags={"Items"},
      * summary="Update Item",
-     * @SWG\Parameter(
+     * @OA\Parameter(
      * name="id",
      * in="path",
      * required=true,
      * type="integer",
      * description="Update the specified Item by id.",
      *       ),
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *           name="body",
      *           in="body",
      *           required=true,
-     *           @SWG\Schema(ref="#/definitions/Item"),
+     *           @OA\Schema(ref="#/definitions/Item"),
      *           description="Json format",
      *       ),
-     * @SWG\Response(
+     * @OA\Response(
      * response=200,
      * description="Success: Return the Item updated",
-     * @SWG\Schema(ref="#/definitions/Item")
+     * @OA\Schema(ref="#/definitions/Item")
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      * response="422",
      * description="Missing mandatory field"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      * response="404",
      * description="Not Found"
      * )
@@ -153,6 +165,17 @@ class itemController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validator = Validator::make($request->all(), [
+            'type' => 'required',
+            'name' => 'required',
+            'company' => 'required',
+            'bike_id' => 'required'
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
         $updateItemById = Item::findOrFail($id);
 
         $updateItemById->update($request->all());
@@ -166,12 +189,12 @@ class itemController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      *
-     * @SWG\Delete(
+     * @OA\Delete(
      * path="/api/items/{id}",
      * tags={"Items"},
      * summary="Delete Item",
      * description="Delete the specified Item by id",
-     * @SWG\Parameter(
+     * @OA\Parameter(
      * description="Item id to delete",
      * in="path",
      * name="id",
@@ -179,11 +202,11 @@ class itemController extends Controller
      * type="integer",
      * format="int64"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      * response=404,
      * description="Not found"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      * response=204,
      * description="Success: successful deleted"
      * ),

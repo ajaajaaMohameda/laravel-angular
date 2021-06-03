@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Builder;
+use Validator;
 
 class BuilderController extends Controller
 {
@@ -13,16 +14,16 @@ class BuilderController extends Controller
      *
      * @return \Illuminate\Http\Response
      * 
-     * @SWG\Get(
+     * @OA\Get(
      *  path="api/builders",
      *  tags={"Builders"},
      *  summary="List Builders",
-     * @SWG\Response(
+     * @OA\Response(
      *  response="200",
      *  description="Success: List all Builders",
-     *  @SWG\Schema(ref="#/definitions/Builder")
+     *  @OA\Schema(ref="#/definitions/Builder")
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      *  response="404",
      *  description="Not Found"
      *  )
@@ -41,31 +42,31 @@ class BuilderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      * 
-     * @SWG\Post(
+     * @OA\Post(
      *  path="api/builders",
      *  tags={"Builders"},
      *  summary="Create Builder",
-     *  @SWG\parameter(
+     *  @OA\parameter(
      *      name="body",
      *      in="body",
      *      required=true,
-     *      @SWG\Schema(ref="#/definitions/Builder"),
+     *      @OA\Schema(ref="#/definitions/Builder"),
      *      description="Json format"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      *  response=201,
      *  description="Success: A newly created builder",
-     *  @SWG\Schema(ref="#/definitions/Builder"),
+     *  @OA\Schema(ref="#/definitions/Builder"),
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      *  response="422",
      *  description="Missing mandatory field"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      *  response = "404",
      *  description="Not found"
      * ),
-     * @SWG\response(
+     * @OA\response(
      *  response="405",
      *  description="Invalid HTTP Method"
      * )
@@ -74,6 +75,15 @@ class BuilderController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'description' => 'required',
+            'location' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         $createBuilder = Builder::create($request->all());
         return $createBuilder;
     }
@@ -84,28 +94,28 @@ class BuilderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      * 
-     * @SWG\Get(
+     * @OA\Get(
      *  path="/api/builders/{id}",
      *  tags={"Builders"},
      *  summary = "Get Builder by Id",
      *  
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *  name="id",
      *  in="path",
      *  required="true",
      *  type="integer",
      *  description="Display the specified Builder by id"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      *  response=200,
      *  description="Success: Return the builder",
-     * @SWG\Schema(ref="#/definitions/Builder")
+     * @OA\Schema(ref="#/definitions/Builder")
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      *  response=404,
      *  description="Not found"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      *  response=405,
      *  description="Invalid HTTP Method"
      * )
@@ -126,38 +136,38 @@ class BuilderController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      *
-     * @SWG\Put(
+     * @OA\Put(
      * path="/api/builders/{id}",
      * tags={"Builders"},
      * summary="Update Builder",
-     * @SWG\Parameter(
+     * @OA\Parameter(
      * name="id",
      * in="path",
      * required=true,
      * type="integer",
      * description="Update the specified Builder by id.",
      *      ),
-     * @SWG\Parameter(
+     * @OA\Parameter(
      *          name="body",
      *          in="body",
      *          required=true,
-     *          @SWG\Schema(ref="#/definitions/Builder"),
+     *          @OA\Schema(ref="#/definitions/Builder"),
      *          description="Json format",
      *      ),
-     * @SWG\Response(
+     * @OA\Response(
      * response=200,
      * description="Success: Return the Builder updated",
-     * @SWG\Schema(ref="#/definitions/Builder")
+     * @OA\Schema(ref="#/definitions/Builder")
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      * response="422",
      * description="Missing mandatory field"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      * response="404",
      * description="Not Found"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      *          response="405",
      *          description="Invalid HTTP Method"
      * )
@@ -166,6 +176,15 @@ class BuilderController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'description' => 'required',
+            'location' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         $updateBuilderById = Builder::findOrFail($id);
 
         $updateBuilderById->update($request->all());
@@ -179,12 +198,12 @@ class BuilderController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      *
-     * @SWG\Delete(
+     * @OA\Delete(
      * path="/api/builders/{id}",
      * tags={"Builders"},
      * summary="Delete Builder",
      * description="Delete the specified Builder by id",
-     * @SWG\Parameter(
+     * @OA\Parameter(
      * description="Builder id to delete",
      * in="path",
      * name="id",
@@ -192,15 +211,15 @@ class BuilderController extends Controller
      * type="integer",
      * format="int64"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      * response=404,
      * description="Not found"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      *          response="405",
      *          description="Invalid HTTP Method"
      * ),
-     * @SWG\Response(
+     * @OA\Response(
      * response=204,
      * description="Success: successful deleted"
      * ),
@@ -210,7 +229,7 @@ class BuilderController extends Controller
     {
         //
         $deletedBuilderById = Builder::find($id)->delete();
-        
+
         return response()->json([], 204);
     }
 }
