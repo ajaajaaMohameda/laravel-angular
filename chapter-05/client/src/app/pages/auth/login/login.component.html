@@ -7,21 +7,42 @@
         <hr>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" [ngClass]="{'has-error': !email.valid && (email.dirty || email.touched)}">
         <label for="email">Email address</label>
         <input
         [(ngModel)]="user.email" #email="ngModel"
-        type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+        type="email" class="form-control"
+        id="email" aria-describedby="emailHelp"
+        placeholder="Enter email"  required>
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="form-feedback">
+          <div *ngIf="email?.errors.required">Email is required</div>
+          <div *ngIf="email?.errors.email">Email must be a valid email address</div>
+        </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" [ngClass]="{'has-error': !password.valid && (password.dirty || password.touched)}">
         <label for="password">Password</label>
         <input
           [(ngModel)]="user.password" #password="ngModel"
-        type="password" id="password" class="form-control" placeholder="Password">
+        type="password" id="password" class="form-control"
+        placeholder="Password"
+        required minlength="6">
+
+        <div *ngIf="password.invalid && (password.dirty||password.touched)" class="form-feedback">
+          <div *ngIf="password?.errors.required">
+            Password is required
+          </div>
+
+          <div *ngIf="password?.errors.minlength">
+            Password must be at least 6 characters
+          </div>
+        </div>
       </div>
 
-      <button class="btn lg btn-primary btn-block mt-5" type="submit">Login</button>
+      <div *ngIf="error" class="alert alert-danger" role="alert">
+        Ops: {{error.error}}
+      </div>
+      <button [disabled]="!loginForm.valid" class="btn lg btn-primary btn-block mt-5" type="submit">Login</button>
     </form>
   </div>
 </main>
