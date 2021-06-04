@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: ''
+  apiUrl: 'https://8081-purple-cat-l975qng9.ws-eu08.gitpod.io/api'
 };
 
 /*
