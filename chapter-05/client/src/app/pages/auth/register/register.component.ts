@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
 
   user: User = new User();
   error: any;
-  registerForm: FormGroup;
+  registerForm: FormGroup = new FormGroup({}) ;
 
   constructor(
     private authService: AuthService,
@@ -35,8 +35,9 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if(!this.registerForm) return
     this.authService.onRegister(this.registerForm.value).subscribe(
-      response => {
+      () => {
         this.router.navigate(['bikes']);
       }, (response) => {
         if(response.statuts === 422) {

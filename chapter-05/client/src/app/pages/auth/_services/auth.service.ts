@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from './../../../../environments/environment';
@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class AuthService {
 
-  public currentUser: User = {};
+  public currentUser: User = new User;
   private readonly apiUrl = environment.apiUrl;
   private registerUrl = this.apiUrl + '/register';
   private loginUrl = this.apiUrl + '/login';
@@ -24,12 +24,13 @@ export class AuthService {
     private http: HttpClient, private router: Router
   ) { }
 
-  onRegister(user: User): Observable<User> {
+  onRegister(user: User): Observable<User|any> {
     const request = JSON.stringify({
       name: user.name, email: user.email, password: user.password
     });
 
-    return this.http.post(this.registerUrl, request, httpOptions).pipe(map((response: User) => {
+    return this.http.post<any>(this.registerUrl, request, httpOptions).pipe(
+      map((response: User) => {
       const token: string = response['access_token'];
 
       if (token) {
@@ -46,7 +47,7 @@ export class AuthService {
       email: user.email, password: user.password
     });
 
-    return this.http.post(this.loginUrl, request, httpOptions).pipe(map((response: User) => {
+    return this.http.post<any>(this.loginUrl, request, httpOptions).pipe(map((response: User) => {
       const token: string = response['access_token'];
 
       if (token) {
@@ -58,7 +59,7 @@ export class AuthService {
   }
 
   onLogout(): Observable<User> {
-    return this.http.post(this.apiUrl + '/logout', httpOptions).pipe(
+    return this.http.post<any>(this.apiUrl + '/logout', httpOptions).pipe(
       tap(() => {
         localStorage.removeItem('token');
         this.router.navigate(['/']);

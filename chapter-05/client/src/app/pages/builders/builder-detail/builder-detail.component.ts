@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BuilderDetailComponent implements OnInit {
 
-  builder: Builder;
+  builder: Builder = new Builder;
   isLoading: boolean = false;
 
   constructor(private builderService: BuildersService, private route: ActivatedRoute) { }
@@ -24,7 +24,13 @@ export class BuilderDetailComponent implements OnInit {
 
   getBuilderDetail(): void {
     this.isLoading = true;
-    const id = +this.route.snapshot.paramMap.get('id');
+    const idParam = this.route.snapshot.paramMap.get('id');;
+
+    if(!idParam) {
+      return;
+    }
+
+    const id = +idParam;
 
     this.builderService.getBuilderDetail(id).subscribe(builder => {
       this.isLoading = false;

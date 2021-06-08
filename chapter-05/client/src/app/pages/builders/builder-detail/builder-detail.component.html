@@ -16,16 +16,16 @@
               <strong>Featured Bike</strong>:
             </div>
             <div class="card-img-top text-md-center">
-              <img src="{{ builder?.bike.picture }}" alt="" srcset="">
+              <img src="{{ builder?.bike?.picture }}" alt="" srcset="">
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Make: {{ builder?.bike.make }} |
-                <span class="text-secondary">Year: {{ builder?.bike.year}}</span>
+              <li class="list-group-item">Make: {{ builder?.bike?.make }} |
+                <span class="text-secondary">Year: {{ builder?.bike?.year}}</span>
               </li>
-              <li class="list-group-item">Model: {{ builder?.bike.model }} </li>
-              <li class="list-group-item">Mods: {{ builder?.bike.mods }} </li>
-              <li class="list-group-item">
-                <a routerLink="/bikes/{{ builder?.bike['id'] }}" routerLinkActive="router-link-active" class="card-link">Bike Details</a>
+              <li class="list-group-item">Model: {{ builder?.bike?.model}} </li>
+              <li class="list-group-item">Mods: {{ builder?.bike?.mods}} </li>
+              <li class="list-group-item" *ngIf="builder && builder?.bike">
+                <a  routerLink="/bikes/{{ builder?.bike?.id }}" routerLinkActive="router-link-active" class="card-link">Bike Details</a>
               </li>
             </ul>
           </div>

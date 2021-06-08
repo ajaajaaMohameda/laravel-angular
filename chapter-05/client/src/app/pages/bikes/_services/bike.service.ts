@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { HttpClient,  } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 // App import
 import { environment } from '../../../../environments/environment';
@@ -28,9 +27,10 @@ export class BikeService {
     );
   }
 
-  getBikeDetail(id: number): Observable<Bike[]> {
-    return this.http.get<Bike[]>(this.bikesUrl + `/${id}`)
+  getBikeDetail(id: number): Observable<Bike|any> {
+    return this.http.get<any>(this.bikesUrl + `/${id}`)
       .pipe(
+        map(res => res['data']),
         catchError(this.handleError('getBikeDetail', []))
       );
   }
@@ -42,16 +42,16 @@ export class BikeService {
   }
 
   updateBike(bike: Bike, id: number): Observable<Bike> {
-    return this.http.put<Bike>(this.bikesUrl + `/${id}`, bike).pipe(
+    return this.http.put<any>(this.bikesUrl + `/${id}`, bike).pipe(
+      map(res => res['data']),
       catchError(this.handleError('updateBike', bike))
     )
   }
   /** DELETE bike bike endpoint */
-  deleteBike(id: number): Observable<Bike[]> {
-    return this.http.delete<Bike[]>(this.bikesUrl
-      + `/${id}`)
+  deleteBike(id: number): Observable<any> {
+    return this.http.delete<any>(this.bikesUrl
+ + `/${id}`)
       .pipe(
-
         catchError(this.handleError('deleteBike'))
       );
   }

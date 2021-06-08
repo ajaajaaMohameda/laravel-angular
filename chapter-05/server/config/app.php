@@ -147,7 +147,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         \L5Swagger\L5SwaggerServiceProvider::class,
-
+        FruitCake\Cors\CorsServiceProvider::class,
         /*
          * Package Service Providers...
          */

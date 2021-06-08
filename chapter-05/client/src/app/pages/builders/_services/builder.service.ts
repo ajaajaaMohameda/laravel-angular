@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpParams, HttpErrorResponse } from
+import { HttpClient } from
   '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 // App import
 import { environment } from
@@ -36,11 +35,10 @@ export class BuildersService {
 
   /** GET builder detail from builder-detail endpoint
 */
-  getBuilderDetail(id: number):
-    Observable<Builder[]> {
-    return this.http.get<Builder[]>(this.buildersUrl +
-      `/${id}`)
+  getBuilderDetail(id: number):Observable<Builder|any> {
+    return this.http.get<any>(this.buildersUrl +`/${id}`)
       .pipe(
+        map(res => res['data']),
         catchError(this.handleError('getBuilderDetail', []))
       );
   }
@@ -63,10 +61,10 @@ export class BuildersService {
         catchError(this.handleError('updateBuilder', builder))
       );
   }
+
   /** DELETE builder builder endpoint */
-  deleteBuilder(id: number): Observable<Builder[]> {
-    return this.http.delete<Builder[]>
-      (this.buildersUrl + `/${id}`)
+  deleteBuilder(id: number): Observable<any> {
+    return this.http.delete<Builder>(this.buildersUrl + `/${id}`)
       .pipe(
         catchError(this.handleError('deleteBuilder'))
       );

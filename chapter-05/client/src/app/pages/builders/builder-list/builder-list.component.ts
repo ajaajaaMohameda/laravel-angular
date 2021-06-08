@@ -9,7 +9,7 @@ import { BuildersService } from '../_services/builder.service';
 })
 export class BuilderListComponent implements OnInit {
 
-  builders: Builder[];
+  builders: Builder[] = [];
   isLoading: boolean = false;
 
   constructor(private builderService: BuildersService) { }
@@ -30,7 +30,7 @@ export class BuilderListComponent implements OnInit {
     this.builders = response;
   }
 
-  protected handleResponse(error: any) {
+  protected handleError(error: any) {
     this.isLoading = false;
     console.log(error);
   }

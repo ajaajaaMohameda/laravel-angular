@@ -10,9 +10,9 @@ import { BikeService } from '../_services/bike.service';
 })
 export class BikeListComponent implements OnInit {
 
-  bikes: Bike[];
+  bikes: Bike[] = [];
   isLoading: boolean = false;
-  public searchText: string;
+  public searchText: string = '';
 
   constructor(private bikeService: BikeService) { }
 

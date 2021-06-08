@@ -7,41 +7,39 @@
         <hr>
       </div>
       <div class="form-group"
-      [ngClass]="{'has-error': !registerForm.get('name').valid && (registerForm.get('name').dirty && registerForm.get('name').touched)}">
+        [ngClass]="{'has-error': !registerForm?.get('name')?.valid && (registerForm?.get('name')?.dirty && registerForm?.get('name')?.touched)}">
         <label for="name">Name</label>
-        <input
-        formControlName="name"
-        type="name" class="form-control" id="name" aria-describedby="nameHelp"
+        <input formControlName="name" type="name" class="form-control" id="name" aria-describedby="nameHelp"
           placeholder="Enter your name">
         <div class="form-feedback"
-          *ngIf="registerForm.get('name').errors && (registerForm.get('name').dirty || registerForm.get('name').touched)">
-          <div *ngIf="registerForm.get('name').hasError('required')">Name is required</div>
+          *ngIf="registerForm?.get('name')?.errors && (registerForm?.get('name')?.dirty || registerForm?.get('name')?.touched)">
+          <div *ngIf="registerForm?.get('name')?.hasError('required')">Name is required</div>
         </div>
       </div>
       <div class="form-group"
-      [ngClass]="{ 'has-error': !registerForm.get('email').valid && (registerForm.get('email').dirty || registerForm.get('email').touched) }">
+        [ngClass]="{ 'has-error': !registerForm?.get('email')?.valid && (registerForm?.get('email')?.dirty || registerForm?.get('email')?.touched) }">
         <label for="email">Email address</label>
-        <input
-        formControlName="email"
-        type="email" class="form-control" id="email" aria- describedby="emailHelp" placeholder="Enter email">
+        <input formControlName="email" type="email" class="form-control" id="email" aria- describedby="emailHelp"
+          placeholder="Enter email">
         <div class="form-feedback"
-                *ngIf="registerForm.get('email').errors && (registerForm.get('email').dirty || registerForm.get('email').touched)">
-                        <div *ngIf="registerForm.get('email').hasError('required')">Email is required</div>
-                        <div *ngIf="registerForm.get('email').hasError('email')">Email must be a valid email address</div>
-                </div>
+          *ngIf="registerForm?.get('email')?.errors && (registerForm?.get('email')?.dirty || registerForm?.get('email')?.touched)">
+          <div *ngIf="registerForm?.get('email')?.hasError('required')">Email is required</div>
+          <div *ngIf="registerForm?.get('email')?.hasError('email')">Email must be a valid email address</div>
+        </div>
       </div>
-      <div class="form-group"  [ngClass]="{ 'has-error': !registerForm.get('password').valid && (registerForm.get('password').dirty || registerForm.get('password').touched) }">
+      <div class="form-group"
+        [ngClass]="{ 'has-error': !registerForm?.get('password')?.valid && (registerForm?.get('password')?.dirty || registerForm?.get('password')?.touched) }">
         <label for="password">Password</label>
         <input
-        formControlName="password"
-        type="password" class="form-control" id="password" placeholder="Password">
-       [ngClass]="{ 'has-error': !registerForm.get('password').valid && (registerForm.get('password').dirty || registerForm.get('password').touched) }"
+          [ngClass]="{ 'has-error': !registerForm?.get('password')?.valid && (registerForm?.get('password')?.dirty || registerForm?.get('password')?.touched) }"
+          formControlName="password" type="password" class="form-control" id="password" placeholder="Password">
       </div>
 
       <div *ngIf="error" class="alert alert-danger" role="alert">
         Ops: {{error}}
       </div>
-      <button [disabled]="!registerForm.valid"  class="btn btn-lg btn-primary btn-block mt-5" type="submit">Register</button>
+      <button [disabled]="!registerForm?.valid" class="btn btn-lg btn-primary btn-block mt-5"
+        type="submit">Register</button>
     </form>
   </div>
 </main>

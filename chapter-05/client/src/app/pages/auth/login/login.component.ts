@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { AuthService } from '../_services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   user: User = new User();
   error: any;
-  returnUrl: string;
+  returnUrl: string = '';
 
   constructor(
     private authService: AuthService,
@@ -24,8 +25,8 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
   }
 
-  onSubmit(loginForm): void {
-    this.authService.onLogin(this.user).subscribe(response => {
+  onSubmit(loginForm: NgForm): void {
+    this.authService.onLogin(this.user).subscribe(() => {
       this.router.navigate([this.returnUrl]);
     }, (error) => {
       this.error = error.error;

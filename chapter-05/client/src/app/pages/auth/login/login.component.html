@@ -15,8 +15,8 @@
         id="email" aria-describedby="emailHelp"
         placeholder="Enter email"  required>
         <div *ngIf="email.invalid && (email.dirty || email.touched)" class="form-feedback">
-          <div *ngIf="email?.errors.required">Email is required</div>
-          <div *ngIf="email?.errors.email">Email must be a valid email address</div>
+          <div *ngIf="email?.errors!.required">Email is required</div>
+          <div *ngIf="email?.errors!.email">Email must be a valid email address</div>
         </div>
       </div>
 
@@ -29,11 +29,11 @@
         required minlength="6">
 
         <div *ngIf="password.invalid && (password.dirty||password.touched)" class="form-feedback">
-          <div *ngIf="password?.errors.required">
+          <div *ngIf="password?.errors?.required">
             Password is required
           </div>
 
-          <div *ngIf="password?.errors.minlength">
+          <div *ngIf="password?.errors?.minlength">
             Password must be at least 6 characters
           </div>
         </div>
