@@ -15,7 +15,7 @@ import { HandleError, HttpHandleErrorService } from '../../shared/_services/http
 })
 
 export class BuildersService {
-  private readonly apiUrl = environment.apiUrl;
+  private readonly apiUrl = environment.endpoint;
   private buildersUrl = this.apiUrl + '/builders';
   private handleError: HandleError;
 

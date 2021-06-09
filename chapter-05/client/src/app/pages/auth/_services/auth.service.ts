@@ -17,7 +17,7 @@ const httpOptions = {
 export class AuthService {
 
   public currentUser: User = new User;
-  private readonly apiUrl = environment.apiUrl;
+  private readonly apiUrl = environment.endpoint;
   private registerUrl = this.apiUrl + '/register';
   private loginUrl = this.apiUrl + '/login';
   constructor(

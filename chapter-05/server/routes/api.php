@@ -18,6 +18,9 @@ use App\Http\Resources\BikesResource;
     return $request->user();
 }); */
 
+// header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+// header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Authorization, Accept,charset,boundary,Content-Length');
+
 // Register Routes
 
 Route::post('register', 'API\AuthController@register');

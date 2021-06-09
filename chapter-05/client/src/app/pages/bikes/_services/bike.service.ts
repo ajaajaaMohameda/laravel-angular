@@ -13,7 +13,7 @@ import { HandleError, HttpHandleErrorService } from '../../shared/_services/http
 })
 export class BikeService {
 
-  private readonly apiUrl = environment.apiUrl;
+  private readonly apiUrl = environment.endpoint;
   private bikesUrl = this.apiUrl + '/bikes';
   private handleError: HandleError;
 
@@ -22,7 +22,8 @@ export class BikeService {
   }
 
   getBikes(): Observable<Bike[]> {
-    return this.http.get<Bike[]>(this.bikesUrl).pipe(
+    return this.http.get<any>(this.bikesUrl).pipe(        map(res => res['data']),
+
       catchError(this.handleError('getBikes', []))
     );
   }
